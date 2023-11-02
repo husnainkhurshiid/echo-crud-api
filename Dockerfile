@@ -1,14 +1,20 @@
 FROM golang:latest
 
-WORKDIR /cmd
+WORKDIR /app
 
+# Copy go.mod and go.sum files to download dependencies
 COPY go.mod .
 COPY go.sum .
-COPY cmd/*.go ./cmd/ 
+
+RUN go install github.com/cosmtrek/air@latest
+# Download Go module dependencies
 RUN go mod download
 
-RUN go build -o cmd/main
+# Copy the entire source code into the Docker image
+COPY . .
 
-EXPOSE 8080
+# Build the Go application
+RUN go build -o main cmd/main.go
 
-CMD ["./cmd/main"]
+# Set the entry point for the container
+CMD ["./main"]

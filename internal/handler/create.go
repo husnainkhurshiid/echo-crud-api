@@ -23,6 +23,6 @@ func CreateEmployee(c echo.Context, db *gorm.DB) error {
 	if err != nil {
 		return c.String(http.StatusInternalServerError, "employee creation failed")
 	} else {
-		return c.String(http.StatusBadRequest, "employee created successfully")
+		return c.String(http.StatusCreated, "employee created successfully")
 	}
 }

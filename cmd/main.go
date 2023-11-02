@@ -39,8 +39,8 @@ func main() {
 		return handler.DeleteEmployee(c, conn)
 	})
 
-	address := ":8080"
-	if err := router.Start(address); err != nil {
+	// address := os.Getenv("PORT")
+	if err := router.Start(":8080"); err != nil {
 		fmt.Printf("Error starting the server: %v", err)
 	}
 

@@ -23,5 +23,5 @@ func UpdateEmployee(c echo.Context, db *gorm.DB) error {
 		return c.String(http.StatusInternalServerError, "Failed to update employee data")
 	}
 
-	return c.String(http.StatusCreated, "Employee updated successfully")
+	return c.String(http.StatusOK, "Employee updated successfully")
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 
 	"gopkg.in/yaml.v2"
 	"gorm.io/driver/sqlite"
@@ -39,13 +40,13 @@ func loadConfig(configPath string) (Config, error) {
 
 // to eastablish a connection with sqlite db
 func OpenDbConnection() (*gorm.DB, error) {
-	filePath := "../configs/config.yaml"
-	config, err := loadConfig(filePath)
+	filePath := os.Getenv("CONFIG_PATH")
+	_, err := loadConfig(filePath)
 	if err != nil {
 		log.Fatalf("Error loading config: %v", err)
 	}
 
-	connUrl := fmt.Sprintf("file:%s?cache=shared&_loc=auto", config.Database.ConnectionString)
+	connUrl := fmt.Sprintf("file:%s?cache=shared&_loc=auto", os.Getenv("DB_PATH"))
 	db, err := gorm.Open(sqlite.Open(connUrl), &gorm.Config{})
 	if err != nil {
 		return nil, err

@@ -15,5 +15,5 @@ func DeleteEmployee(c echo.Context, db *gorm.DB) error {
 	if err != nil {
 		return c.String(http.StatusInternalServerError, "Failed to retrieve employees")
 	}
-	return c.String(http.StatusCreated, "Employee deleted successfully")
+	return c.String(http.StatusAccepted, "Employee deleted successfully")
 }

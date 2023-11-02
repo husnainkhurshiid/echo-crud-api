@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  go-crud-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - CONFIG_PATH=/app/configs/config.yaml
+      - DB_PATH = /app/pkg/database/crud.sqlite
+      - PORT= :8080
+    ports:
+      - "8080:8080"
+
+networks:
+  default:
+    name: go-crud-api-network
