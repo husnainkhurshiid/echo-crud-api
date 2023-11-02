@@ -15,6 +15,7 @@ func main() {
 		fmt.Printf("Database connection error %v", err)
 		return
 	}
+	defer db.CloseDbConnection(conn)
 
 	router := echo.New()
 	router.Debug = true

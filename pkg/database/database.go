@@ -63,3 +63,20 @@ func CloseDbConnection(db *gorm.DB) {
 	}
 	sqlDB.Close()
 }
+
+// to eastablish a connection with sqlite db
+func OpenDbConnectionTest() (*gorm.DB, error) {
+	filePath := "../configs/config.yaml"
+	_, err := loadConfig(filePath)
+	if err != nil {
+		log.Fatalf("Error loading config: %v", err)
+	}
+
+	connUrl := fmt.Sprintf("file:%s?cache=shared&_loc=auto", os.Getenv("DB_PATH"))
+	db, err := gorm.Open(sqlite.Open(connUrl), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+	db.AutoMigrate(&model.Employee{})
+	return db, nil
+}
