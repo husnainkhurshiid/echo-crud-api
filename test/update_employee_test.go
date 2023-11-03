@@ -24,7 +24,7 @@ func TestUpdateEmployee(t *testing.T) {
 	e := echo.New()
 
 	reqBody := []byte(`{"Name":"Husnain", "Position":"Golang Dev", "Department":"Backend", "Email":"husnain@updated.com"}`)
-	req := httptest.NewRequest(http.MethodPut, "/update/"+EmployeeID, bytes.NewReader(reqBody))
+	req := httptest.NewRequest(http.MethodPut, fmt.Sprintf("/update/%v", EmployeeID), bytes.NewReader(reqBody))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)

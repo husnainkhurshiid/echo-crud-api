@@ -21,7 +21,7 @@ func TestDeleteEmployee(t *testing.T) {
 
 	e := echo.New()
 
-	req := httptest.NewRequest(http.MethodDelete, "/delete/"+EmployeeID, nil)
+	req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/delete/%v", EmployeeID), nil)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 
